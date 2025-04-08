@@ -39,4 +39,16 @@ else
     file.close()
 
     print("Coordinates saved!")
+
+    -- Set the current program to autostart
+    local current = shell.getRunningProgram()
+    local target = "startup.lua"
+
+    if fs.getName(current) ~= target then
+        local path = fs.getDir(current)
+        local newPath = fs.combine(path, target)
+        fs.move(current, newPath)
+    end
+
+    print("Renamed the program to 'startup.lua' to have it run on boot !")
 end
